@@ -1093,7 +1093,8 @@ module Merb
     end
     
     # Extract application dependencies by querying the app directly.
-    def self.extract_dependencies(merb_root)
+    def self.extract_dependencies(merb_root, env = nil)
+      env ||= ENV["MERB_ENV"] || 'production'
       require 'merb-core'
       if !@_merb_loaded || Merb.root != merb_root
         Merb.start_environment(
